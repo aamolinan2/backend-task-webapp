@@ -1,4 +1,4 @@
-name: Backend CI
+name: Backend CI/CD
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,7 +17,7 @@ jobs:
     - name: Instalar Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 20.18.1
+        node-version: 20
 
     - name: Instalar dependencias
       run: npm install
@@ -27,3 +27,11 @@ jobs:
 
     - name: Ejecutar pruebas
       run: npm run test
+
+    - name: Instalar Firebase CLI
+      run: npm install -g firebase-tools
+
+    - name: Desplegar a Firebase
+      run: firebase deploy --only functions
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
