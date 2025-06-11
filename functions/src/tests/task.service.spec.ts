@@ -1,7 +1,7 @@
-import { TaskService } from '../src/services/task.service';
-import { TaskRepository } from '../src/repositories/task.repository';
+import { TaskService } from '../services/task.service';
+import { TaskRepository } from '../repositories/task.repository';
 
-jest.mock('../src/repositories/task.repository');
+jest.mock('../repositories/task.repository');
 
 describe('TaskService', () => {
   let service: TaskService;

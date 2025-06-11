@@ -1,7 +1,7 @@
-import { UserService } from '../src/services/user.service';
-import { UserRepository } from '../src/repositories/user.repository';
+import { UserService } from '../services/user.service';
+import { UserRepository } from '../repositories/user.repository';
 
-jest.mock('../src/repositories/user.repository');
+jest.mock('../repositories/user.repository');
 
 describe('UserService', () => {
   let service: UserService;
