@@ -1,11 +1,11 @@
 # Node modules
-node_modules/
+/functions/node_modules/
 
 # Environment variables
-.env
+/functions/.env
 
 # Compiled output
-dist/
+/functions/dist/
 
 # Firebase service account
 serviceAccountKey.json
