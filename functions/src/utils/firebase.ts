@@ -4,14 +4,16 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+//console.log('functions.config().service.client_email:', JSON.stringify(functions.config()) );
+
 if (!admin.apps.length) {
-  const isLocal = process.env.FUNCTIONS_EMULATOR === 'true' || !process.env.FUNCTIONS_EMULATOR;
+  const isLocal = process.env.FUNCTIONS_EMULATOR?.toLowerCase() === 'true';
 
   const credential = isLocal
     ? {
         projectId: process.env.FB_PROJECT_ID,
         clientEmail: process.env.FB_CLIENT_EMAIL,
-        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        privateKey: process.env.FB_PRIVATE_KEY?.replace(/\\n/g, '\n'),
       }
     : {
         projectId: functions.config().service.project_id,

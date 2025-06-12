@@ -5,7 +5,12 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "start:local": "ts-node src/local.ts",
+    "deploy": "npm run build && firebase deploy --only functions"
+  },
+    "engines": {
+    "node": "20"
   },
   "dependencies": {
     "dotenv": "^16.5.0",

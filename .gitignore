@@ -2,7 +2,7 @@
 /functions/node_modules/
 
 # Environment variables
-/functions/.env
+.env
 
 # Compiled output
 /functions/dist/
