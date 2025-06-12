@@ -19,6 +19,18 @@ export class TaskRepository {
     }));
   }
 
+  async getAll(): Promise<Task[]> {
+    const snapshot = await db
+      .collection(COLLECTION)
+      .orderBy('createdAt', 'desc')
+      .get();
+
+    return snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...(doc.data() as Omit<Task, 'id'>),
+    }));
+  }
+
   async create(task: Omit<Task, 'id'>): Promise<Task> {
     const docRef = await db.collection(COLLECTION).add(task);
     const snap = await docRef.get();

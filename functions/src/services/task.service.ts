@@ -10,6 +10,10 @@ export class TaskService {
     return this.repository.getAllByUser(userId);
   }
 
+  async getAllTasks(): Promise<Task[]> {
+    return this.repository.getAll();
+  }
+
   async createTask(userId: string, data: { title: string; description: string }): Promise<Task> {
     const newTask: Omit<Task, 'id'> = {
       title: data.title,

@@ -9,6 +9,12 @@ const service = new TaskService();
 
 // Listar tareas
 router.get('/', async (req, res) => {
+  const tasks = await service.getAllTasks();
+  res.json(tasks);
+});
+
+// Listar tareas por usuario
+router.get('/byUser', async (req, res) => {
   const tasks = await service.getTasksByUser((req as any).userId);
   res.json(tasks);
 });
