@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { UserService } from '../services/user.service';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { User } from '../models/user.model';
 
 dotenv.config();
 
@@ -13,7 +14,8 @@ router.post('/login', async (req, res) => {
   if (!email) return res.status(400).json({ message: 'Email is required' });
 
   try {
-    const { user } = await service.findOrCreateUser(email);
+    const { user } = await service.findOrCreateUser(email);    
+   
     const token = jwt.sign({ uid: user.id, email: user.email }, process.env.JWT_SECRET!, {
       expiresIn: Number(process.env.JWT_EXPIRES_IN) || 3600,
     });
@@ -28,8 +30,14 @@ router.post('/', async (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ message: 'Email is required' });
 
-  const { user, created } = await service.findOrCreateUser(email);
-  res.status(created ? 201 : 200).json(user);
+  const { user, created, message } = await service.findOrCreateUser(email);
+
+   if (created){      
+      res.status(200).json(user);
+    } else {
+      return res.status(500).json({ message: message });
+    }
+ 
 });
 
 // GET /users/:email - Buscar usuario por email

@@ -4,9 +4,11 @@ import { UserRepository } from '../repositories/user.repository';
 export class UserService {
   private repo = new UserRepository();
 
-  async findOrCreateUser(email: string): Promise<{ user: User; created: boolean }> {
+  async findOrCreateUser(email: string): Promise<{ user: User; created: boolean, message?: string }> {
     let user = await this.repo.findByEmail(email);
-    if (user) return { user, created: false };
+    if (user) return { user,
+      created: false,
+      message: '¡El usuario ya existe!' };
 
     user = await this.repo.create(email);
     return { user, created: true };
