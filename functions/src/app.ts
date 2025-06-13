@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: ['https://frontend-task-webapp.web.app'],
+  origin: ['https://frontend-task-webapp.web.app', 'http://localhost:4200'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
